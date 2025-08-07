@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atharva Deshmukh - IoT Engineer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            z-index: -1;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Left Sidebar */
+        .sidebar {
+            width: 350px;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            border-right: 1px solid rgba(251, 191, 36, 0.3);
+            box-shadow: 0 0 50px rgba(251, 191, 36, 0.1);
+        }
+
+        .profile {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+        }
+
+        .profile-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-title {
+            color: #9ca3af;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        .divider {
+            width: 100%;
+            height: 1px;
+            background: #2a2a2a;
+            margin: 2rem 0;
+        }
+
+        .contact-info {
+            space-y: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 0.75rem;
+            background: #242424;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: #2a2a2a;
+            transform: translateX(5px);
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: #333333;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: #fbbf24;
+        }
+
+        .contact-details h4 {
+            font-size: 0.8rem;
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.2rem;
+        }
+
+        .contact-details p {
+            color: #ffffff;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 350px;
+            flex: 1;
+            padding: 0;
+        }
+
+        /* Navigation */
+        .nav {
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem 3rem;
+            border-bottom: 1px solid rgba(251, 191, 36, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+            justify-content: center;
+        }
+
+        .nav-item {
+            color: #9ca3af;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            color: #fbbf24;
+        }
+
+        .nav-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 2px;
+            background: #fbbf24;
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 3rem;
+            max-width: 1000px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .section-subtitle {
+            width: 50px;
+            height: 3px;
+            background: #fbbf24;
+            margin-bottom: 2rem;
+        }
+
+        .about-description {
+            font-size: 1.1rem;
+            color: #d1d5db;
+            line-height: 1.7;
+            margin-bottom: 3rem;
+        }
+
+        .section-heading {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 2rem;
+        }
+
+        /* Service Cards */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .service-card {
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #f093fb, #fbbf24, #4facfe, transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: #fbbf24;
+            box-shadow: 0 10px 40px rgba(251, 191, 36, 0.1);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-icon {
+            width: 50px;
+            height: 50px;
+            background: #242424;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            color: #fbbf24;
+        }
+
+        .service-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .service-description {
+            color: #9ca3af;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            text-align: center;
+        }
+
+        .skill-category h4 {
+            color: #fbbf24;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .skill-tag {
+            background: #242424;
+            color: #d1d5db;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid #333333;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            border-color: #fbbf24;
+            background: rgba(251, 191, 36, 0.1);
+            color: #fbbf24;
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            margin: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #fbbf24, #667eea);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-left: 2rem;
+            margin-bottom: 3rem;
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 2rem;
+            width: 12px;
+            height: 12px;
+            background: #fbbf24;
+            border-radius: 50%;
+            border: 3px solid #0a0a0a;
+        }
+
+        .timeline-date {
+            color: #fbbf24;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            color: #ffffff;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-company {
+            color: #9ca3af;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-description {
+            color: #d1d5db;
+            line-height: 1.6;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: #fbbf24;
+            box-shadow: 0 15px 50px rgba(251, 191, 36, 0.1);
+        }
+
+        .project-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 50%);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0%, 100% { transform: rotate(0deg) translate(-50%, -50%); }
+            50% { transform: rotate(180deg) translate(-50%, -50%); }
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .project-award {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-date {
+            color: #fbbf24;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            color: #d1d5db;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            background: #242424;
+            color: #fbbf24;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid #333333;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .nav-menu {
+                gap: 1.5rem;
+                flex-wrap: wrap;
+            }
+
+            .content-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-card {
+                padding: 1.5rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                flex-direction: column;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333333;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #fbbf24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Sidebar -->
+        <div class="sidebar">
+            <div class="profile">
+                <div class="profile-img">
+    <img src="Linkedin_pic.jpg" alt="Profile Photo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
+</div>
+
+
+
+                <h2 class="profile-name">Atharva Deshmukh</h2>
+                <p class="profile-title">IoT Engineer</p>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4>Email</h4>
+                        <p>atharva.deshmukh1804@gmail.com</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4>Phone</h4>
+                        <p>+91 9142612787</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4>Birthday</h4>
+                        <p>April 18, 2004</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4>Location</h4>
+                        <p>Mumbai, Maharashtra, India</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Navigation -->
+            <nav class="nav">
+                <ul class="nav-menu">
+                    <li><a href="#about" class="nav-item active">About</a></li>
+                    <li><a href="#resume" class="nav-item">Resume</a></li>
+                    <li><a href="#Projects" class="nav-item">Projects</a></li>
+                    <li><a href="#achievements" class="nav-item">Achievements</a></li>
+                    <li><a href="#contact" class="nav-item">Contact</a></li>
+                </ul>
+            </nav>
+
+            
+
+
+            <!-- About Section -->
+            <section id="about" class="content-section">
+                <h1 class="section-title">About Me</h1>
+                <div class="section-subtitle"></div>
+                
+                <p class="about-description">
+                    An enthusiastic and driven engineering student with a deep passion for innovation and problem-solving. I thrive on transforming ideas into impactful solutions and constantly seek opportunities to learn, grow, and make a meaningful difference through technology.
+                </p>
+
+                <h2 class="section-heading">What I'm Doing</h2>
+
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-header">
+                            <div class="service-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <h3 class="service-title">IoT System Development</h3>
+                        </div>
+                        <p class="service-description">
+                            Designing and deploying end-to-end IoT solutions using ESP32, MQTT, and AWS IoT for real-time monitoring, control, and analytics.
+                        </p>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-header">
+                            <div class="service-icon">
+                                <i class="fab fa-aws"></i>
+                            </div>
+                            <h3 class="service-title">Cloud & AWS Integration</h3>
+                        </div>
+                        <p class="service-description">
+                            Building secure, scalable cloud infrastructures with AWS services like IoT Core, Fleet Provisioning, DynamoDB, Lambda, Glue, and QuickSight.
+                        </p>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-header">
+                            <div class="service-icon">
+                                <i class="fas fa-cog"></i>
+                            </div>
+                            <h3 class="service-title">Embedded Systems & RTOS</h3>
+                        </div>
+                        <p class="service-description">
+                            Developing real-time embedded applications using FreeRTOS and ESP-IDF for mission-critical IoT devices.
+                        </p>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-header">
+                            <div class="service-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <h3 class="service-title">AI & Computer Vision</h3>
+                        </div>
+                        <p class="service-description">
+                            Implementing intelligent systems with Python and OpenCV for face recognition, motion detection, and AI-powered analytics.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Skills Section -->
+                <h2 class="section-heading">Technical Skills</h2>
+                <div class="skills-container">
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h4>Programming</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">C</span>
+                                <span class="skill-tag">C++</span>
+                                <span class="skill-tag">Python</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4>IoT & Hardware</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">ESP32</span>
+                                <span class="skill-tag">Arduino</span>
+                                <span class="skill-tag">MQTT</span>
+                                <span class="skill-tag">LoRa-WAN</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Cloud Services</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">AWS IoT</span>
+                                <span class="skill-tag">Lambda</span>
+                                <span class="skill-tag">DynamoDB</span>
+                                <span class="skill-tag">QuickSight</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Development</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">ESP-IDF</span>
+                                <span class="skill-tag">FreeRTOS</span>
+                                <span class="skill-tag">OpenCV</span>
+                                <span class="skill-tag">Git</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Analytics</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">InfluxDB</span>
+                                <span class="skill-tag">Grafana</span>
+                                <span class="skill-tag">Telegraf</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resume Section -->
+            <section id="resume" class="content-section" style="display: none;">
+                <h1 class="section-title">Resume</h1>
+                <div class="section-subtitle"></div>
+
+                <h2 class="section-heading">Education</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2021 - 2025</div>
+                        <h3 class="timeline-title">Bachelor of Technology (B.Tech)</h3>
+                        <p class="timeline-company">Engineering College</p>
+                        <p class="timeline-description">
+                            Currently in final year, specializing in IoT engineering and cloud technologies with hands-on experience in embedded systems and real-time applications.
+                        </p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2019 - 2021</div>
+                        <h3 class="timeline-title">Higher Secondary Certificate (12th)</h3>
+                        <p class="timeline-company">Science Stream</p>
+                        <p class="timeline-description">
+                            Completed higher secondary education with focus on Physics, Chemistry, Mathematics, and Computer Science, building a strong foundation for engineering studies.
+                        </p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2019</div>
+                        <h3 class="timeline-title">Secondary School Certificate (10th)</h3>
+                        <p class="timeline-company">High School</p>
+                        <p class="timeline-description">
+                            Completed secondary education with excellent grades, demonstrating strong analytical and problem-solving abilities across all subjects.
+                        </p>
+                    </div>
+                </div>
+
+                <h2 class="section-heading">Experience</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">March 2025 - Present</div>
+                        <h3 class="timeline-title">Full Stack IoT Intern</h3>
+                        <p class="timeline-company">Teezash Technologies</p>
+                        <p class="timeline-description">
+                            Developed a real-time IoT gas detection system using ESP32, MQTT, and AWS IoT Core with secure onboarding via Fleet Provisioning by Claim and remote management through AWS IoT Fleet Manager. Integrated AWS services including Device Shadow, Lambda, DynamoDB, and SNS for state synchronization, event-driven alerts, and real-time monitoring via Telegraf, InfluxDB, and Grafana. Implemented a cloud analytics pipeline using AWS Glue, S3, Athena, and QuickSight for time-series data cataloging, SQL-based querying, and interactive dashboard visualizations.
+                        </p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">January 2025 - March 2025</div>
+                        <h3 class="timeline-title">IoT Intern</h3>
+                        <p class="timeline-company">AshXpert</p>
+                        <p class="timeline-description">
+                            Developed an IoT-based intelligent traffic monitoring system using ESP32, integrated with CCTV, tyre killer actuators. Implemented MQTT-based communication for secure, lightweight data transmission between IoT nodes and the cloud backend, facilitating remote monitoring, system diagnostics, and automated fine issuance.
+                        </p>
+                    </div>
+                </div>
+
+                
+
+                <h2 class="section-heading">Technical Skills</h2>
+                <div class="skills-container">
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h4>Programming Languages</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">C</span>
+                                <span class="skill-tag">C++</span>
+                                <span class="skill-tag">Python</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4>IoT & Embedded Systems</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">ESP32</span>
+                                <span class="skill-tag">Arduino IDE</span>
+                                <span class="skill-tag">ESP-IDF</span>
+                                <span class="skill-tag">FreeRTOS</span>
+                                <span class="skill-tag">MQTT</span>
+                                <span class="skill-tag">LoRa-WAN</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Cloud & AWS Services</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">AWS IoT Core</span>
+                                <span class="skill-tag">AWS Lambda</span>
+                                <span class="skill-tag">DynamoDB</span>
+                                <span class="skill-tag">AWS S3</span>
+                                <span class="skill-tag">AWS Glue</span>
+                                <span class="skill-tag">QuickSight</span>
+                                <span class="skill-tag">Fleet Provisioning</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Data Analytics & Monitoring</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">InfluxDB</span>
+                                <span class="skill-tag">Grafana</span>
+                                <span class="skill-tag">Telegraf</span>
+                                <span class="skill-tag">Athena</span>
+                                <span class="skill-tag">OpenCV</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Development Tools</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">VS Code</span>
+                                <span class="skill-tag">PlatformIO</span>
+                                <span class="skill-tag">GitHub</span>
+                                <span class="skill-tag">Jira</span>
+                                <span class="skill-tag">Confluence</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Specializations</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Real Time Operating System (RTOS)</span>
+                                <span class="skill-tag">Sensor Integration</span>
+                                <span class="skill-tag">Signal Processing</span>
+                                <span class="skill-tag">Deep Learning</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="Projects" class="content-section" style="display: none;">
+                <h1 class="section-title">Projects</h1>
+                <div class="section-subtitle"></div>
+
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">ANGIOSENSE 🏆</h3>
+                            <p class="project-award">INNOWAVE 2.0 Winner</p>
+                        </div>
+                        <div class="project-content">
+                            <p class="project-date">January 2025</p>
+                            <p class="project-description">
+                                Developed a non-invasive, cost-effective alternative to traditional angiography using Bioimpedance and PPG principles. Integrated IoT and AI to enhance cardiovascular diagnostics, minimizing risks associated with radiation exposure.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">IoT</span>
+                                <span class="tech-tag">AI</span>
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Signal Processing</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">ALERTIFY</h3>
+                        </div>
+                        <div class="project-content">
+                            <p class="project-date">November 2023</p>
+                            <p class="project-description">
+                                Built an IoT device for real-time earthquake detection using ESP32, FreeRTOS, and AWS IoT Core with Espressif IDF. Integrated ground activity sensors to trigger automated evacuation alerts.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">ESP32</span>
+                                <span class="tech-tag">FreeRTOS</span>
+                                <span class="tech-tag">AWS IoT</span>
+                                <span class="tech-tag">ESP-IDF</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">CRIME VISION 🥈</h3>
+                            <p class="project-award">Rajasthan Police Hackathon Finalist</p>
+                        </div>
+                        <div class="project-content">
+                            <p class="project-date">February 2024</p>
+                            <p class="project-description">
+                                Developed a CCTV-based surveillance system using AI-powered suspicious activity detection and human face recognition. Used OpenCV for real-time object detection and motion tracking.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Deep Learning</span>
+                                <span class="tech-tag">OpenCV</span>
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">AI</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">RESCON 🥈</h3>
+                            <p class="project-award">NIRMAN 3.0 1st Runner Up</p>
+                        </div>
+                        <div class="project-content">
+                            <p class="project-date">April 2024</p>
+                            <p class="project-description">
+                                Engineered a GPS-based rescue device for mountaineers with real-time distress alerts over LoRa-WAN and MQTT. Implemented long-range, low-power communication protocols.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">LoRa-WAN</span>
+                                <span class="tech-tag">MQTT</span>
+                                <span class="tech-tag">GPS</span>
+                                <span class="tech-tag">IoT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">Predictive Maintenance System</h3>
+                        </div>
+                        <div class="project-content">
+                            <p class="project-date">August 2024</p>
+                            <p class="project-description">
+                                Designed an IoT-powered predictive maintenance system for industrial machinery. Implemented sensor-based monitoring to reduce downtime and optimize maintenance schedules using InfluxDB.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">IoT</span>
+                                <span class="tech-tag">InfluxDB</span>
+                                <span class="tech-tag">Grafana</span>
+                                <span class="tech-tag">Industrial IoT</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Achievements Section -->
+            <section id="achievements" class="content-section" style="display: none;">
+                <h1 class="section-title">Achievements</h1>
+                <div class="section-subtitle"></div>
+                
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">METASOFT 2024 2nd International Conference 🏆</h3>
+                            <p class="project-award">Winner 1st Prize</p>
+                        </div>
+                        <div class="project-content">
+                            <p class="project-date">2024</p>
+                            <p class="project-description">
+                                Conference on Metaheuristics in Engineering and its Applications organized by the Department of Computer Application, Siksha 'O' Anusandhan University.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Research</span>
+                                <span class="tech-tag">Conference</span>
+                                <span class="tech-tag">1st Prize</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">TRITHON 🏆</h3>
+                            <p class="project-award">Winner 1st Prize</p>
+                        </div>
+                        <div class="project-content">
+                            <p class="project-date">2024</p>
+                            <p class="project-description">
+                                24-hour Hackathon organized by Trident Group, showcasing innovative solutions and technical excellence.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Hackathon</span>
+                                <span class="tech-tag">24 Hours</span>
+                                <span class="tech-tag">1st Prize</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">SYNCHRONIZE 2.0 🥈</h3>
+                            <p class="project-award">1st Runner Up</p>
+                        </div>
+                        <div class="project-content">
+                            <p class="project-date">2024</p>
+                            <p class="project-description">
+                                12-hour Hackathon organized by XIM University, Bhubaneswar, demonstrating innovative problem-solving skills.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Hackathon</span>
+                                <span class="tech-tag">XIM University</span>
+                                <span class="tech-tag">Runner Up</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">Summit B-Plan 🏆</h3>
+                            <p class="project-award">Winner 1st Prize</p>
+                        </div>
+                        <div class="project-content">
+                            <p class="project-date">2024</p>
+                            <p class="project-description">
+                                Business pitch competition organized by IIT Bhubaneswar, showcasing entrepreneurial innovation and business acumen.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Business Plan</span>
+                                <span class="tech-tag">IIT Bhubaneswar</span>
+                                <span class="tech-tag">1st Prize</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">NIRMAN 3.0 🥈</h3>
+                            <p class="project-award">1st Runner Up</p>
+                        </div>
+                        <div class="project-content">
+                            <p class="project-date">2024</p>
+                            <p class="project-description">
+                                Ideation prototype presentation organized by Silicon University, Bhubaneswar, focusing on innovative engineering solutions.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Prototype</span>
+                                <span class="tech-tag">Silicon University</span>
+                                <span class="tech-tag">Runner Up</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">NIRMAN 3.0 🥈</h3>
+                            <p class="project-award">2nd Runner Up</p>
+                        </div>
+                        <div class="project-content">
+                            <p class="project-date">2024</p>
+                            <p class="project-description">
+                                12-hour Hackathon organized by Silicon University, Bhubaneswar, demonstrating rapid prototyping and development skills.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">12-hour Hackathon</span>
+                                <span class="tech-tag">Silicon University</span>
+                                <span class="tech-tag">2nd Runner Up</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">E-Summit Hackathon 🥈</h3>
+                            <p class="project-award">2nd Runner Up</p>
+                        </div>
+                        <div class="project-content">
+                            <p class="project-date">2024</p>
+                            <p class="project-description">
+                                24-hour Hackathon organized by ITER, SOA University, showcasing innovative technology solutions and collaborative development.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">24-hour Hackathon</span>
+                                <span class="tech-tag">SOA University</span>
+                                <span class="tech-tag">2nd Runner Up</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">E-Summit Ideathon 🏅</h3>
+                            <p class="project-award">Special Recognition</p>
+                        </div>
+                        <div class="project-content">
+                            <p class="project-date">2024</p>
+                            <p class="project-description">
+                                Special recognition award in Ideathon Proto Production organized by ITER, SOA University, for innovative concept development.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Ideathon</span>
+                                <span class="tech-tag">Proto Production</span>
+                                <span class="tech-tag">Special Recognition</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">GGV IDEATHON 2024 🥈</h3>
+                            <p class="project-award">1st Runner Up</p>
+                        </div>
+                        <div class="project-content">
+                            <p class="project-date">2024</p>
+                            <p class="project-description">
+                                A National level Ideathon organized by GGV Bilaspur, Chhattisgarh, focusing on innovative solutions for real-world problems.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">National Level</span>
+                                <span class="tech-tag">GGV Bilaspur</span>
+                                <span class="tech-tag">Runner Up</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">UTKARSH ODISHA 🎯</h3>
+                            <p class="project-award">Presented</p>
+                        </div>
+                        <div class="project-content">
+                            <p class="project-date">2025</p>
+                            <p class="project-description">
+                                Presented innovative project at UTKARSH ODISHA make in Odisha Conclave'25, showcasing technological innovation for regional development.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Make in Odisha</span>
+                                <span class="tech-tag">Conclave 2025</span>
+                                <span class="tech-tag">Innovation</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="content-section" style="display: none;">
+                <h1 class="section-title">Contact</h1>
+                <div class="section-subtitle"></div>
+                
+                <p class="about-description">
+                    Let's connect and discuss opportunities in IoT, cloud technologies, and innovative solutions. I'm always excited to collaborate on interesting projects!
+                </p>
+
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-header">
+                            <div class="service-icon">
+                                <i class="fab fa-linkedin-in"></i>
+                            </div>
+                            <h3 class="service-title">LinkedIn</h3>
+                        </div>
+                        <p class="service-description">
+                            Connect with me on LinkedIn for professional networking and career opportunities.
+                        </p>
+                        <a href="https://www.linkedin.com/in/atharva-jitendra-deshmukh" target="_blank" style="color: #fbbf24; text-decoration: none;">View Profile →</a>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-header">
+                            <div class="service-icon">
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <h3 class="service-title">GitHub</h3>
+                        </div>
+                        <p class="service-description">
+                            Check out my open-source projects and contribute to IoT and embedded systems repositories.
+                        </p>
+                        <a href="https://github.com/athxrva18" target="_blank" style="color: #fbbf24; text-decoration: none;">View Repository →</a>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-header">
+                            <div class="service-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <h3 class="service-title">Email</h3>
+                        </div>
+                        <p class="service-description">
+                            Send me an email for project collaborations, job opportunities, or technical discussions.
+                        </p>
+                        <a href="mailto:atharva.deshmukh1804@gmail.com" style="color: #fbbf24; text-decoration: none;">Send Email →</a>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-header">
+                            <div class="service-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <h3 class="service-title">Phone</h3>
+                        </div>
+                        <p class="service-description">
+                            Give me a call to discuss immediate opportunities or urgent project requirements.
+                        </p>
+                        <a href="tel:+919142612787" style="color: #fbbf24; text-decoration: none;">Call Now →</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const navItems = document.querySelectorAll('.nav-item');
+            const sections = document.querySelectorAll('.content-section');
+
+            // Function to show section
+            function showSection(targetId) {
+                // Hide all sections
+                sections.forEach(section => {
+                    section.style.display = 'none';
+                });
+
+                // Show target section
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.style.display = 'block';
+                }
+
+                // Update active nav item
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                const activeNavItem = document.querySelector(`[href="#${targetId}"]`);
+                if (activeNavItem) {
+                    activeNavItem.classList.add('active');
+                }
+            }
+
+            // Add click event listeners to nav items
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    showSection(targetId);
+                });
+            });
+
+            // Show about section by default
+            showSection('about');
+
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all elements with fade-in class
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Add hover effects to service cards
+            document.querySelectorAll('.service-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Add hover effects to project cards
+            document.querySelectorAll('.project-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Add click effects to contact items in sidebar
+            document.querySelectorAll('.contact-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const emailItem = this.querySelector('.contact-details p');
+                    if (emailItem && emailItem.textContent.includes('@')) {
+                        window.location.href = 'mailto:' + emailItem.textContent;
+                    } else if (emailItem && emailItem.textContent.includes('+')) {
+                        window.location.href = 'tel:' + emailItem.textContent;
+                    }
+                });
+            });
+
+            // Smooth scrolling effect
+            document.documentElement.style.scrollBehavior = 'smooth';
+
+            // Add typing effect to section titles
+            function typeWriter(element, text, speed = 100) {
+                element.textContent = '';
+                let i = 0;
+                const timer = setInterval(() => {
+                    if (i < text.length) {
+                        element.textContent += text.charAt(i);
+                        i++;
+                    } else {
+                        clearInterval(timer);
+                    }
+                }, speed);
+            }
+
+            // Apply typing effect when switching sections
+            const originalShowSection = showSection;
+            showSection = function(targetId) {
+                originalShowSection(targetId);
+                
+                setTimeout(() => {
+                    const title = document.querySelector(`#${targetId} .section-title`);
+                    if (title) {
+                        const titleText = title.textContent;
+                        typeWriter(title, titleText, 80);
+                    }
+                }, 100);
+            };
+
+            // Add loading animation
+            window.addEventListener('load', () => {
+                document.body.style.opacity = '0';
+                document.body.style.transition = 'opacity 0.5s ease-in-out';
+                
+                setTimeout(() => {
+                    document.body.style.opacity = '1';
+                }, 100);
+            });
+
+            // Add particles animation to background
+            function createParticle() {
+                const particle = document.createElement('div');
+                particle.style.cssText = `
+                    position: fixed;
+                    width: 2px;
+                    height: 2px;
+                    background: #fbbf24;
+                    border-radius: 50%;
+                    opacity: 0.3;
+                    pointer-events: none;
+                    left: ${Math.random() * window.innerWidth}px;
+                    top: ${window.innerHeight}px;
+                    animation: floatUp 8s linear infinite;
+                    z-index: -1;
+                `;
+                
+                document.body.appendChild(particle);
+                
+                setTimeout(() => {
+                    particle.remove();
+                }, 8000);
+            }
+
+            // Add CSS for particle animation
+            const particleStyle = document.createElement('style');
+            particleStyle.textContent = `
+                @keyframes floatUp {
+                    0% {
+                        transform: translateY(0) rotate(0deg);
+                        opacity: 0.3;
+                    }
+                    100% {
+                        transform: translateY(-100vh) rotate(360deg);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(particleStyle);
+
+            // Create particles periodically
+            setInterval(createParticle, 2000);
+
+            // Add responsive navigation for mobile
+            if (window.innerWidth <= 768) {
+                const sidebar = document.querySelector('.sidebar');
+                const mainContent = document.querySelector('.main-content');
+                
+                // Make sidebar collapsible on mobile
+                const toggleBtn = document.createElement('button');
+                toggleBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                toggleBtn.style.cssText = `
+                    position: fixed;
+                    top: 1rem;
+                    left: 1rem;
+                    z-index: 1001;
+                    background: #fbbf24;
+                    color: #0a0a0a;
+                    border: none;
+                    padding: 0.8rem;
+                    border-radius: 8px;
+                    font-size: 1.2rem;
+                    cursor: pointer;
+                    display: none;
+                `;
+                
+                document.body.appendChild(toggleBtn);
+                
+                if (window.innerWidth <= 768) {
+                    toggleBtn.style.display = 'block';
+                    sidebar.style.transform = 'translateX(-100%)';
+                    sidebar.style.transition = 'transform 0.3s ease';
+                    
+                    toggleBtn.addEventListener('click', () => {
+                        const isHidden = sidebar.style.transform === 'translateX(-100%)';
+                        sidebar.style.transform = isHidden ? 'translateX(0)' : 'translateX(-100%)';
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
