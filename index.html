@@ -45,6 +45,29 @@
             min-height: 100vh;
         }
 
+        /* Mobile Toggle Button */
+        .mobile-toggle {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 1001;
+            background: #fbbf24;
+            color: #0a0a0a;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: none;
+            box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(251, 191, 36, 0.4);
+        }
+
         /* Left Sidebar */
         .sidebar {
             width: 350px;
@@ -57,6 +80,7 @@
             overflow-y: auto;
             border-right: 1px solid rgba(251, 191, 36, 0.3);
             box-shadow: 0 0 50px rgba(251, 191, 36, 0.1);
+            transition: transform 0.3s ease;
         }
 
         .profile {
@@ -76,6 +100,14 @@
             font-size: 4rem;
             color: white;
             box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+            overflow: hidden;
+        }
+
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
         }
 
         .profile-name {
@@ -506,23 +538,49 @@
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            .container {
+                flex-direction: column;
+            }
+
             .sidebar {
                 width: 100%;
                 position: relative;
                 height: auto;
+                transform: none;
+                margin-top: 4rem;
+                border-right: none;
+                border-bottom: 1px solid rgba(251, 191, 36, 0.3);
             }
 
             .main-content {
                 margin-left: 0;
+                order: 2;
+            }
+
+            .nav {
+                padding: 1rem 1.5rem;
             }
 
             .nav-menu {
                 gap: 1.5rem;
                 flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-item {
+                font-size: 0.9rem;
             }
 
             .content-section {
                 padding: 2rem 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
             }
 
             .services-grid {
@@ -537,8 +595,26 @@
                 grid-template-columns: 1fr;
             }
 
-            .container {
-                flex-direction: column;
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            .profile-img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .profile-name {
+                font-size: 1.5rem;
+            }
+
+            /* Mobile sidebar toggle functionality */
+            .sidebar.mobile-hidden {
+                display: none;
+            }
+
+            .main-content.sidebar-hidden {
+                order: 1;
             }
         }
 
@@ -574,16 +650,17 @@
     </style>
 </head>
 <body>
+    <button class="mobile-toggle" id="mobileToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
     <div class="container">
         <!-- Left Sidebar -->
-        <div class="sidebar">
+        <div class="sidebar" id="sidebar">
             <div class="profile">
                 <div class="profile-img">
-    <img src="Linkedin_pic.jpg" alt="Profile Photo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
-</div>
-
-
-
+                    <i class="fas fa-user" style="font-size: 3rem;"></i>
+                </div>
                 <h2 class="profile-name">Atharva Deshmukh</h2>
                 <p class="profile-title">IoT Engineer</p>
             </div>
@@ -634,7 +711,7 @@
         </div>
 
         <!-- Main Content -->
-        <div class="main-content">
+        <div class="main-content" id="mainContent">
             <!-- Navigation -->
             <nav class="nav">
                 <ul class="nav-menu">
@@ -645,9 +722,6 @@
                     <li><a href="#contact" class="nav-item">Contact</a></li>
                 </ul>
             </nav>
-
-            
-
 
             <!-- About Section -->
             <section id="about" class="content-section">
@@ -813,8 +887,6 @@
                         </p>
                     </div>
                 </div>
-
-                
 
                 <h2 class="section-heading">Technical Skills</h2>
                 <div class="skills-container">
@@ -1243,6 +1315,9 @@
         document.addEventListener('DOMContentLoaded', function() {
             const navItems = document.querySelectorAll('.nav-item');
             const sections = document.querySelectorAll('.content-section');
+            const mobileToggle = document.getElementById('mobileToggle');
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
 
             // Function to show section
             function showSection(targetId) {
@@ -1268,16 +1343,71 @@
                 }
             }
 
+            // Mobile toggle functionality
+            let sidebarVisible = true;
+            
+            function toggleMobileLayout() {
+                if (window.innerWidth <= 768) {
+                    if (sidebarVisible) {
+                        // Hide sidebar, show main content
+                        sidebar.classList.add('mobile-hidden');
+                        mainContent.classList.add('sidebar-hidden');
+                        mobileToggle.innerHTML = '<i class="fas fa-user"></i>';
+                    } else {
+                        // Show sidebar, hide main content
+                        sidebar.classList.remove('mobile-hidden');
+                        mainContent.classList.remove('sidebar-hidden');
+                        mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                    sidebarVisible = !sidebarVisible;
+                }
+            }
+
+            // Initialize mobile layout
+            function initMobileLayout() {
+                if (window.innerWidth <= 768) {
+                    // Start with sidebar visible on mobile
+                    sidebarVisible = true;
+                    sidebar.classList.remove('mobile-hidden');
+                    mainContent.classList.remove('sidebar-hidden');
+                    mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            }
+
+            // Mobile toggle event listener
+            mobileToggle.addEventListener('click', toggleMobileLayout);
+
             // Add click event listeners to nav items
             navItems.forEach(item => {
                 item.addEventListener('click', function(e) {
                     e.preventDefault();
                     const targetId = this.getAttribute('href').substring(1);
                     showSection(targetId);
+                    
+                    // On mobile, after clicking nav item, show main content
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.add('mobile-hidden');
+                        mainContent.classList.add('sidebar-hidden');
+                        mobileToggle.innerHTML = '<i class="fas fa-user"></i>';
+                        sidebarVisible = false;
+                    }
                 });
             });
 
-            // Show about section by default
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    // Reset to desktop layout
+                    sidebar.classList.remove('mobile-hidden');
+                    mainContent.classList.remove('sidebar-hidden');
+                    sidebarVisible = true;
+                } else {
+                    initMobileLayout();
+                }
+            });
+
+            // Initialize
+            initMobileLayout();
             showSection('about');
 
             // Intersection Observer for animations
@@ -1416,43 +1546,6 @@
 
             // Create particles periodically
             setInterval(createParticle, 2000);
-
-            // Add responsive navigation for mobile
-            if (window.innerWidth <= 768) {
-                const sidebar = document.querySelector('.sidebar');
-                const mainContent = document.querySelector('.main-content');
-                
-                // Make sidebar collapsible on mobile
-                const toggleBtn = document.createElement('button');
-                toggleBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                toggleBtn.style.cssText = `
-                    position: fixed;
-                    top: 1rem;
-                    left: 1rem;
-                    z-index: 1001;
-                    background: #fbbf24;
-                    color: #0a0a0a;
-                    border: none;
-                    padding: 0.8rem;
-                    border-radius: 8px;
-                    font-size: 1.2rem;
-                    cursor: pointer;
-                    display: none;
-                `;
-                
-                document.body.appendChild(toggleBtn);
-                
-                if (window.innerWidth <= 768) {
-                    toggleBtn.style.display = 'block';
-                    sidebar.style.transform = 'translateX(-100%)';
-                    sidebar.style.transition = 'transform 0.3s ease';
-                    
-                    toggleBtn.addEventListener('click', () => {
-                        const isHidden = sidebar.style.transform === 'translateX(-100%)';
-                        sidebar.style.transform = isHidden ? 'translateX(0)' : 'translateX(-100%)';
-                    });
-                }
-            }
         });
     </script>
 </body>
